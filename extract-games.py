@@ -1,7 +1,9 @@
+from dotenv import load_dotenv
 import urllib.request
 import datetime
 import json
 import csv
+import os
 
 def set_datetime(time):
   start = datetime.datetime.strptime(time[0], "%Y-%m-%d")
@@ -14,7 +16,7 @@ def main():
     url = 'https://api.sportsdata.io/v3/csgo/scores/json/GamesByDate/'
     time = "2020-06-03", "2020-06-04"
     headers = {}
-    headers['Ocp-Apim-Subscription-Key'] = "6abbd4e99e494e3d90edaaa48284ed82"
+    headers['Ocp-Apim-Subscription-Key'] = os.getenv("KEY_CSGO_DATA_API")
     dates = set_datetime(time)
     count = 0
     for date in dates:
@@ -38,4 +40,5 @@ def main():
     print(str(e))
 
 if __name__ == "__main__":
+  load_dotenv()
   main()
