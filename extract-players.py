@@ -7,8 +7,8 @@ import os
 
 def get_team():
     df = pd.read_csv('teams.csv')
-    print(type(df["TeamId"]))
-    return df["TeamId"]
+    
+    return list(df["TeamId"])
 
 def main():
       try:
@@ -31,10 +31,10 @@ def main():
             for player in data:              
                 if count == 0:
                     header = player.keys()
-                    csvwriter.writerow([header, "TeamId"])
+                    csvwriter.writerow([*(header), "TeamId"])
                 count += 1
                 values = player.values()
-                csvwriter.writerow([values, team])
+                csvwriter.writerow([*(values), team])
             saveFile.close()
       except Exception as e:
             print(str(e))
